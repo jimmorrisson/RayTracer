@@ -16,7 +16,7 @@ include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 conan_cmake_run(
         BASIC_SETUP
-        CONANFILE conanfile.txt
+        CONANFILE conan_file.txt
         CMAKE_TARGETS
         BUILD missing)
 
