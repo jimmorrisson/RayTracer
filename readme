@@ -1,0 +1,3 @@
+In build catalogue:
+    cmake .. -DCMAKE_BUILD_TYPE=Debug -> Debug Configuration
+    cmake .. -DCMAKE_BUILD_TYPE=Release -> Release Configuration

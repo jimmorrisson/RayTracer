@@ -1,7 +1,25 @@
 #include <iostream>
+#include <vector>
 
-int main(int argc, char* argv[])
+#include <math/Vector.h>
+#include <Sphere.h>
+#include <Functions.h>
+#include <Cube.h>
+
+int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
-  std::cout << "Hello, world!\n";
+  Vector center { 1, 2, 3 };
+  Ray ray{ Vector{ 0, 0, 0 }, Vector{ 0, 0, 0 } };
+
+  std::vector<Shape*> shapes{ new Sphere{ center, 5.0 }, new Cube{ } };
+
+  double d { 0 };
+  for (auto *shape : shapes)
+  {
+    RayTracer::intersects(shape, ray, d);
+  }
+
+  std::cout << "Hello, world! \n";
+  
   return 0;
 }

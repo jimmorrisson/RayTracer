@@ -5,6 +5,7 @@ set(PROJECT_NAME ray_tracer)
 project(${PROJECT_NAME})
 
 set(CMAKE_CXX_STANDARD 17)
+add_compile_options(-Wall -Werror -Wextra)
 
 if (NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
@@ -20,4 +21,8 @@ conan_cmake_run(
         CMAKE_TARGETS
         BUILD missing)
 
+add_subdirectory(src)
+add_subdirectory(tests)
+
 add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} math shapes)
