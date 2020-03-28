@@ -15,3 +15,4 @@ set (HEADERS_SRC
 )
 
 add_library(shapes ${SOURCES_SRC} ${HEADERS_SRC})
+target_include_directories(shapes PUBLIC .)
