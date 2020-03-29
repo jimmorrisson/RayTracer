@@ -11,8 +11,7 @@ namespace RayTracer
 
 bool intersects(Shape *shape, const Ray &ray, double &d)
 {
-    shape->intersects(ray, d);
-    return true;
+    return shape->intersects(ray, d);
 }
 
 }

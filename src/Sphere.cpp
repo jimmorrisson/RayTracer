@@ -7,7 +7,7 @@ Sphere::Sphere(const Vector &center, const double radius) :
     center{ center },
     radius{ radius }
 {
-
+    color = Color::red;
 }
 
 double Sphere::get_radius() const noexcept
