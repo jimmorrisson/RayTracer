@@ -5,6 +5,7 @@ set (SOURCES_SRC
     Ray.cpp
     Cube.cpp
     Plane.cpp
+    Triangle.cpp
     Color.cpp
 )
 
@@ -15,6 +16,7 @@ set (HEADERS_SRC
     Functions.h
     Cube.h
     Plane.h
+    Triangle.h
     Color.h
 )
 

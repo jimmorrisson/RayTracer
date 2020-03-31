@@ -19,12 +19,19 @@ public:
     template <typename T>
     Vector operator*(const T value) noexcept;
 
+    template <typename T>
+    Vector operator/(const T value) const noexcept;
+
     double dot(const Vector &vector) const noexcept;
+
+    Vector cross_product(const Vector &vector) const noexcept;
 
     static constexpr double dot(const Vector &v1, const Vector &v2) noexcept
     { return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z; }
 
     double magnitude() const noexcept;
+
+    [[nodiscard]] Vector normalize() const noexcept;
 
     double get_x() const noexcept;
 
@@ -34,6 +41,9 @@ public:
 
     template <typename T>
     friend Vector operator*(const T val, const Vector &vector);
+
+    template <typename T>
+    friend Vector operator/(const T val, const Vector &vector);
 };
 
 #endif // VECTOR_H
