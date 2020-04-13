@@ -14,10 +14,13 @@ public:
 
     Vector operator+(const Vector &vec) noexcept;
 
-    Vector operator-(const Vector &vec) noexcept;
+    Vector operator-(const Vector &vec) const noexcept;
 
     template <typename T>
-    Vector operator*(const T value) noexcept;
+    Vector operator*(const T value) noexcept
+    {
+        return Vector{ x * value, y * value, z * value };
+    }
 
     template <typename T>
     Vector operator/(const T value) const noexcept;
@@ -33,6 +36,8 @@ public:
 
     [[nodiscard]] Vector normalize() const noexcept;
 
+    void normalize() noexcept;
+
     double get_x() const noexcept;
 
     double get_y() const noexcept;
@@ -44,6 +49,7 @@ public:
 
     template <typename T>
     friend Vector operator/(const T val, const Vector &vector);
+
 };
 
 #endif // VECTOR_H

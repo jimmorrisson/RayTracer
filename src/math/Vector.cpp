@@ -14,16 +14,16 @@ Vector Vector::operator+(const Vector &vec) noexcept
     return Vector{ x + vec.x, y + vec.y, z + vec.z };
 }
 
-Vector Vector::operator-(const Vector &vec) noexcept
+Vector Vector::operator-(const Vector &vec) const noexcept
 {
     return Vector{ x - vec.x, y - vec.y, z - vec.z };
 }
 
-template <typename T>
-Vector Vector::operator*(const T value) noexcept
-{
-    return Vector{ x * value, y * value, z * value };
-}
+// template <typename T>
+// Vector Vector::operator*(const T value) noexcept
+// {
+//     return Vector{ x * value, y * value, z * value };
+// }
 
 template <typename T>
 Vector Vector::operator/(const T value) const noexcept
@@ -58,6 +58,11 @@ double Vector::magnitude() const noexcept
 Vector Vector::normalize() const noexcept
 {
     return *this / magnitude();
+}
+
+void Vector::normalize() noexcept
+{
+    *this = *this / magnitude();
 }
 
 double Vector::get_x() const noexcept

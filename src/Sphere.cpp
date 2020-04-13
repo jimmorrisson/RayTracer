@@ -3,11 +3,11 @@
 #include <iostream>
 #include <cmath>
 
-Sphere::Sphere(const Vector &center, const double radius) :
+Sphere::Sphere(const Vector &center, const double radius, const Color color) :
+    Shape{ color },
     center{ center },
     radius{ radius }
 {
-    color = Color::red;
 }
 
 double Sphere::get_radius() const noexcept
@@ -31,4 +31,9 @@ bool Sphere::intersects(const Ray &ray, double &d)
 
     d = (d1 > d2) ? d1 : d2;
     return true;
+}
+
+void Sphere::set_color(const Color &color)
+{
+    this->color = color;
 }

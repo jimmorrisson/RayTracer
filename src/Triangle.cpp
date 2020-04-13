@@ -38,3 +38,8 @@ bool Triangle::intersects(const Ray &ray, double &d)
 
     return true;
 }
+
+void Triangle::set_color(const Color &color)
+{
+    this->color = color;
+}
