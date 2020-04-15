@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <string>
 
 #include <math/Vector.h>
 #include <Sphere.h>
@@ -17,10 +18,14 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
   Vector center { 1, 2, 3 };
   Ray ray{ Vector{ 0, 0, 0 }, Vector{ 0, 0, 1 } };
 
-  Sphere sphere{ Vector{ 250, 250, 50 }, 50, Color::blue };
-  Triangle triangle{ Vector{ 100, 200, 50 }, Vector{ 200, 200, 50 }, Vector{ 150, 300, 50 } } ;
-  Sphere sphere1 { Vector{ 250, 250, 40 }, 50 };
-  std::vector<Shape*> shapes{ &sphere, &triangle, &sphere1 };
+  // Triangle triangle{ Vector{ 100, 200, 50 }, Vector{ 200, 200, 50 }, Vector{ 150, 300, 50 } } ;
+  Sphere sphere1{ Vector{ 250, 250, 50 }, 50 };
+  Sphere sphere{ Vector{ 100, 250, 50 }, 50, Color::blue };
+  auto plane_normal = Vector{ 0, 10, -1 };
+  plane_normal.normalize();
+  Plane plane{ Vector{ 250, 50, 50 }, plane_normal, Color{ 168, 168, 168 } };
+  // Triangle triangle1{ Vector{ 300, 200, 50 }, Vector{ 400, 200, 50 }, Vector{ 350, 300, 50 } } ;
+  std::vector<Shape*> shapes{ &sphere1, &sphere, &plane };
 
   const uint16_t width{ 500 };
   const uint16_t height{ 500 };
@@ -58,7 +63,9 @@ Color trace(const Ray &ray, const std::vector<Shape*> &shapes, double &d, [[mayb
     //point of intersection
     auto hit_point = ray.get_origin() + d * ray.get_destination();
     auto sphere = dynamic_cast<Sphere*>(shape);
-    if (sphere != nullptr && recursion_counter < max_recursion_counter)
+    if (intersects
+        && sphere != nullptr
+        && recursion_counter < max_recursion_counter)
     {
       //normal at the intersection point
       //normalize the vector direction
@@ -81,5 +88,17 @@ Color trace(const Ray &ray, const std::vector<Shape*> &shapes, double &d, [[mayb
       break;
     }
   }
+
+  std::string filename{ "reflection.txt" };
+  std::ofstream file_stream{ filename, std::ios::out | std::ios::app };
+  if (!file_stream.is_open())
+  {
+    std::cout << "Failed to open reflection.txt" << std::endl;
+  }
+  else
+  {
+    file_stream << "Reflects: " << reflection_color.to_string() << std::endl;
+  }
+  
   return pixel_color + reflection_color;
 } 

@@ -16,10 +16,27 @@ public:
 
     Vector operator-(const Vector &vec) const noexcept;
 
+    bool operator<(const Vector &vec) const noexcept;
+
+    template <typename T> 
+    Vector& operator*=(const T &value) noexcept
+    {
+        x *= value;
+        y *= value;
+        z *= value;
+        return *this;
+    }
+
     template <typename T>
-    Vector operator*(const T value) noexcept
+    Vector operator*(const T &value) const
     {
         return Vector{ x * value, y * value, z * value };
+    }
+
+    template <>
+    Vector operator*(const Vector &v1) const
+    {
+        return Vector { x * v1.x, y * v1.y, z * v1.z };
     }
 
     template <typename T>
@@ -34,7 +51,7 @@ public:
 
     double magnitude() const noexcept;
 
-    [[nodiscard]] Vector normalize() const noexcept;
+    [[nodiscard]] Vector normalize(const Vector &vec) noexcept;
 
     void normalize() noexcept;
 
@@ -44,12 +61,16 @@ public:
 
     double get_z() const noexcept;
 
-    template <typename T>
-    friend Vector operator*(const T val, const Vector &vector);
+    friend Vector operator*(const double val, const Vector &vector);
 
     template <typename T>
     friend Vector operator/(const T val, const Vector &vector);
 
+    static const Vector& zero()
+    {
+        static Vector v{ 0, 0, 0 };
+        return v;
+    }
 };
 
 #endif // VECTOR_H

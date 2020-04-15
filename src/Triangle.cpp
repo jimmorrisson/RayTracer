@@ -19,7 +19,7 @@ bool Triangle::intersects(const Ray &ray, double &d)
 
     if (d < 0) return false;
 
-    auto P = ray.get_origin() + d * ray.get_destination();
+    auto P = ray.get_origin() + ray.get_destination() * d;
 
     auto edge0 = V1 - V0;
     auto vp0 = P - V0;

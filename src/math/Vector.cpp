@@ -19,11 +19,10 @@ Vector Vector::operator-(const Vector &vec) const noexcept
     return Vector{ x - vec.x, y - vec.y, z - vec.z };
 }
 
-// template <typename T>
-// Vector Vector::operator*(const T value) noexcept
-// {
-//     return Vector{ x * value, y * value, z * value };
-// }
+bool Vector::operator<(const Vector &vec) const noexcept
+{
+    return magnitude() < vec.magnitude();
+}
 
 template <typename T>
 Vector Vector::operator/(const T value) const noexcept
@@ -55,9 +54,9 @@ double Vector::magnitude() const noexcept
     return std::sqrt( x * x + y * y + z * z );
 }
 
-Vector Vector::normalize() const noexcept
+Vector Vector::normalize(const Vector &vector) noexcept
 {
-    return *this / magnitude();
+    return vector / vector.magnitude();
 }
 
 void Vector::normalize() noexcept
@@ -80,8 +79,7 @@ double Vector::get_z() const noexcept
     return z;
 }
 
-template <typename T>
-Vector operator*(const T val, const Vector &vector)
+Vector operator*(const double val, const Vector &vector)
 {
     return Vector{ vector.x * val, vector.y * val, vector.z * val };
 }
